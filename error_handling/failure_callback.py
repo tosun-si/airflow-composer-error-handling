@@ -8,7 +8,7 @@ from airflow.exceptions import AirflowException
 from google.cloud import bigquery
 
 DATASET_ID = "mazlum_test"
-JOB_FAILURE_TABLE = "dag_failure"
+DAG_FAILURE_TABLE = "dag_failure"
 DEFAULT_EXCEPTION_NAME = AirflowException.__name__
 
 
@@ -38,13 +38,15 @@ def task_failure_callback(context):
         "exceptionName": _get_exception_name(exception),
         "exceptionTraceback": _get_exception_traceback(exception),
         "logUrl": ti.log_url,
-        "creationDate": datetime.now()
+        "ingestionDate": datetime.now()
     }
-    logging.error(f"##### Error in Airflow DAG in the failure callback ##### !!!!! \n Failure info : {failure_info}")
+    logging.error(
+        f"##### Error in a Airflow DAG managed by the failure callback ##### !!!!! \n Failure info : {failure_info}"
+    )
 
     client = bigquery.Client()
 
     client.insert_rows_json(
-        f'{DATASET_ID}.{JOB_FAILURE_TABLE}',
+        f'{DATASET_ID}.{DAG_FAILURE_TABLE}',
         [failure_info]
     )

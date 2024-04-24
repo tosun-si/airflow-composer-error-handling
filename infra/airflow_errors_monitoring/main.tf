@@ -1,3 +1,21 @@
+resource "google_bigquery_table" "dag_failure_table" {
+  project    = var.project_id
+  dataset_id = "mazlum_test"
+  table_id   = "dag_failure"
+  clustering = [
+    "dagId",
+    "taskId",
+    "dagOperator"
+  ]
+
+  time_partitioning {
+    type  = "DAY"
+    field = "ingestionDate"
+  }
+
+  schema = file("${path.module}/resource/bigquery/schema/dag_failure.json")
+}
+
 resource "google_monitoring_notification_channel" "notification_channel_airflow_errors" {
   project      = var.project_id
   display_name = "GroupBees Airflow error handling notification channel"
@@ -6,10 +24,11 @@ resource "google_monitoring_notification_channel" "notification_channel_airflow_
     email_address = "mtosun@groupbees.fr"
   }
 }
+
 resource "google_logging_metric" "logging_metrics_airflow_errors" {
   project     = var.project_id
   name        = "composer_dags_tasks_errors"
-  filter      = "severity=ERROR AND resource.type=\"cloud_composer_environment\" AND textPayload =~ \"Error in Airflow DAG in the failure callback\""
+  filter      = "severity=ERROR AND resource.type=\"cloud_composer_environment\" AND textPayload =~ \"Error in a Airflow DAG managed by the failure callback\""
   description = "Metric for Cloud Composer DAGs errors. The purpose is a lob-based metric to intercept all the Airflow errors."
   metric_descriptor {
     metric_kind = "DELTA"
@@ -39,10 +58,10 @@ resource "google_monitoring_alert_policy" "alert_policies_airflow_errors" {
     google_logging_metric.logging_metrics_airflow_errors
   ]
   project      = var.project_id
-  display_name = "composer_dags_tasks_dataflow_errors"
+  display_name = "composer_dags_tasks_errors"
   combiner     = "OR"
   conditions {
-    display_name = "composer_dags_tasks_dataflow_errors"
+    display_name = "composer_dags_tasks_errors"
     condition_threshold {
       filter          = "metric.type=\"logging.googleapis.com/user/composer_dags_tasks_errors\" AND resource.type=\"cloud_composer_environment\""
       duration        = "0s"

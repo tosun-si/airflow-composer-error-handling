@@ -1,0 +1,44 @@
+[
+  {
+    "name": "dagId",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "DAG ID"
+  },
+  {
+    "name": "taskId",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Task ID"
+  },
+  {
+    "name": "dagOperator",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Current DAG Operator"
+  },
+  {
+    "name": "exceptionName",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Current Exception Name"
+  },
+  {
+    "name": "exceptionTraceback",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Current Exception Traceback"
+  },
+  {
+    "name": "logUrl",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "URL to access to the current error in Airflow"
+  },
+  {
+    "name": "ingestionDate",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "Ingestion date"
+  }
+]

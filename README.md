@@ -71,7 +71,7 @@ gcloud builds submit \
     --project=$PROJECT_ID \
     --region=$LOCATION \
     --config deploy-airflow-dag.yaml \
-    --substitutions _DAG_FOLDER="$DAG_FOLDER",_COMPOSER_ENVIRONMENT="$COMPOSER_ENVIRONMENT",_ENV="$ENV" \
+    --substitutions _DAG_FOLDER="$DAG_FOLDER",_COMPOSER_ENVIRONMENT="$COMPOSER_ENVIRONMENT" \
     --verbosity="debug" .
 ```
 
