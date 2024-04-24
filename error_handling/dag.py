@@ -11,8 +11,8 @@ with airflow.DAG(
         "dag",
         default_args=settings.dag_default_args,
         schedule_interval=None) as dag:
-    compute_and_insert_team_stats_domain = BigQueryInsertJobOperator(
-        task_id='compute_team_stats_domain',
+    query_with_error = BigQueryInsertJobOperator(
+        task_id='query_with_error',
         configuration={
             "query": {
                 "query": QUERY_WITH_ERROR,
@@ -22,4 +22,4 @@ with airflow.DAG(
         location='EU'
     )
 
-    compute_and_insert_team_stats_domain
+    query_with_error

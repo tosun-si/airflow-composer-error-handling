@@ -40,7 +40,7 @@ def task_failure_callback(context):
         "logUrl": ti.log_url,
         "creationDate": datetime.now()
     }
-    logging.error(f"##### Error in Airflow DAG in the failure callback) ##### !!!!! \n Failure info : {failure_info}")
+    logging.error(f"##### Error in Airflow DAG in the failure callback ##### !!!!! \n Failure info : {failure_info}")
 
     client = bigquery.Client()
 
