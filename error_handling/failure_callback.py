@@ -38,7 +38,7 @@ def task_failure_callback(context):
         "exceptionName": _get_exception_name(exception),
         "exceptionTraceback": _get_exception_traceback(exception),
         "logUrl": ti.log_url,
-        "ingestionDate": datetime.now()
+        "ingestionDate": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     }
     logging.error(
         f"##### Error in a Airflow DAG managed by the failure callback ##### !!!!! \n Failure info : {failure_info}"
