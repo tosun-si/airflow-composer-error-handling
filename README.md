@@ -10,19 +10,7 @@ separation of concern and a centralized code.
 An alert will be fired in real time on each DAG error, and email will be sent.\
 This alert will be created will Cloud Monitoring in GCP, via Terraform and Cloud Build.
 
-![etl_batch_pipeline_composer_dataflow_bq.png](diagram%2Fetl_batch_pipeline_composer_dataflow_bq.png)
-
-The article on this topic :
-
-https://medium.com/google-cloud/etl-batch-pipeline-with-cloud-storage-dataflow-and-bigquery-orchestrated-by-airflow-composer-896625aed586
-
-The video in English :
-
-https://youtu.be/Ps6zllstpVk
-
-The video in French :
-
-https://youtu.be/QcQxEbRjo5o
+![airflow_composer_error_handling_monitoring.png](diagram%2Fairflow_composer_error_handling_monitoring.png)
 
 ## Set env vars in your Shell
 
