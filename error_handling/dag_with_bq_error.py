@@ -8,7 +8,7 @@ settings = Settings()
 QUERY_WITH_ERROR = "SELECT * FROM toto"
 
 with airflow.DAG(
-        "dag",
+        "dag_with_bq_error",
         default_args=settings.dag_default_args,
         schedule_interval=None) as dag:
     query_with_error = BigQueryInsertJobOperator(
